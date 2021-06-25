@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*header{box-sizing: border-box;width: 100%;padding:10px;overflow: hidden;}
+.logo{width:240px; height:70px; background:url(../../images/logo.png) no-repeat 0 10px;text-indent:-999em;}
+.logo a{display:block; width:240px; height:70px}*/
+.main{border:1px solid #d3d3d3; border-radius:5px;background:#fff;}
+
+
+footer{height:60px;}
+footer p{ padding:10px 2px; line-height:24px; text-align:center}
+footer p a:hover{color:#51555C}
+
+.google_ad{width:728px; height:90px; margin:50px auto}
+.ad_76090,.ad_demo{width:760px; height:90px; margin:40px auto}
+.demo_topad{position:absolute; top:15px; right:0px; width:472px; height:60px;}
+
+
+@media screen and (min-width: 320px) and (max-width : 480px) {
+ html{-webkit-text-size-adjust: none;}
+.header{width:100%}
+.logo{width:60px; height:60px; margin: 10px auto; background:url(../../images/logo.png) no-repeat 0 10px;text-indent:-999em;}
+.logo a{display:block; width:60px; height:60px}
+.main{width:100%; margin:10px auto;  -moz-border-radius:0px;-khtml-border-radius: 0px;-webkit-border-radius: 0px; border-radius:0px;}
+ .demo_topad{display:none}
+ .google_ad{width:100%; margin:40px auto; text-align:center}
+.ad_76090,.ad_demo{width:100%; height:auto; margin:40px auto;text-align:center}
+.demo{width:98%; margin:10px auto}
+}

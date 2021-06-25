@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>上机实验管理系统</title>
+
+    <!-- Favicons -->
+    <link th:href="@{/static/img/favicon.png}" rel="icon">
+    <link th:href="@{/static/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/static/lib/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!--external css-->
+    <link th:href="@{/static/lib/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/static/lib/advanced-datatable/css/demo_page.css}" rel="stylesheet"/>
+    <link th:href="@{/static/lib/advanced-datatable/css/demo_table.css}" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/static/lib/advanced-datatable/css/DT_bootstrap.css}"/>
+    <link th:href="@{/static/css/style.css}" rel="stylesheet">
+    <link th:href="@{/static/css/style-responsive.css}" rel="stylesheet">
+</head>
+
+<body>
+<section id="container">
+    <!--header start-->
+    <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        </div>
+        <!--logo start-->
+        <a th:href="@{/admin/main.html}" class="logo">ECNU CS</a>
+        <!--logo end-->
+
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="login.html">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                <p class="centered"><a th:href="@{/admin/main.html}"><img th:src="@{/static/img/ui-sam.jpg}" class="img-circle"
+                                                                width="80"></a></p>
+                <h5 class="centered" th:text="'Welcome, '+${session.loginUser}+' !'"></h5>
+
+                <li class="sub-menu">
+                    <a th:href="@{/admin/user.html}">
+                        &emsp;<i class="fa fa-th"></i>
+                        <span>账号管理</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a th:href="@{/admin/lab.html}">
+                        &emsp;<i class="fa fa-cogs"></i>
+                        <span>实验室管理</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a th:href="@{/admin/stu.html}">
+                        &emsp;<i class="fa fa-dashboard"></i>
+                        <span>学生管理</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a th:href="@{/admin/tch.html}">
+                        &emsp;<i class="fa fa-book"></i>
+                        <span>教师管理</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a th:href="@{/admin/section.html}">
+                        &emsp;<i class="fa fa-calendar"></i>
+                        <span>课程管理</span>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <h3>
+                <a th:href="@{/admin/user.html}">
+                    <i class="fa fa-angle-right"></i> 用户账号管理
+                </a>
+                &emsp;
+                <a type="button" class="btn btn-success"  style="visibility: hidden;"><i class="fa fa-plus"></i>
+                    添加</a>
+            </h3>
+            <hr>
+            <!-- row -->
+            <!--<div class="row mt">-->
+            <div class="col-lg-12">
+<!--                <div class="btn-group">
+                    <a type="button" class="btn btn-success" th:href="@{/admin/stu/add.html}"><i class="fa fa-plus"></i>
+                        添加</a>
+                </div>-->
+                <div class="content-panel">
+                    <table id="hidden-table-info" class="table table-striped table-advance table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>角色</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user:${users}">
+                            <td th:text="${user.getUsername()}"></td>
+                            <td th:text="${user.getPassword()}"></td>
+                            <td th:text="${user.getAddr()}"></td>
+                            <td>
+                                <a th:href="@{/admin/user/edit}+'_'+${user.getUsername()}+.html">
+                                    <button class="btn btn-primary btn-xs" th:alt-title="编辑"><i
+                                            class="fa fa-pencil"></i></button>
+                                </a>
+                                <a th:href="@{/admin/user/del}+'_'+${user.getUsername()}+.html" onclick="javascript:return delConfirm();">
+                                    <!--<button class="btn btn-danger btn-xs" th:alt-title="禁用" th:style="${user.getRole=='禁用账号'?'display: none':''}">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>-->
+                                    <button class="btn btn-danger btn-xs" th:alt-title="禁用">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+            <!--</div>-->
+            <!-- /row -->
+        </section>
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+
+    <!--footer end-->
+</section>
+<!-- js placed at the end of the document so the pages load faster -->
+<script th:src="@{/static/lib/jquery/jquery.min.js}"></script>
+<script th:src="@{/static/lib/advanced-datatable/js/jquery.js}"></script>
+<script th:src="@{/static/lib/bootstrap/js/bootstrap.min.js}"></script>
+<script class="include" type="text/javascript" th:src="@{/static/lib/jquery.dcjqaccordion.2.7.js}"></script>
+<script th:src="@{/static/lib/jquery.scrollTo.min.js}"></script>
+<script th:src="@{/static/lib/jquery.nicescroll.js}" type="text/javascript"></script>
+
+<!--common script for all pages-->
+<script th:src="@{/static/lib/advanced-datatable/js/jquery.dataTables.js}"></script>
+<script th:src="@{/static/lib/advanced-datatable/js/DT_bootstrap.js}"></script>
+<script th:src="@{/static/lib/common-scripts.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      var oTable = $('#hidden-table-info').dataTable({
+        "aoColumnDefs": [{
+          "bSortable": false,
+          "aTargets": [3]
+        }],
+        "aaSorting": [
+          [0, 'asc']
+        ]
+      });
+    });
+
+    function delConfirm() {
+      var msg="确定删除吗?";
+      if(confirm(msg) == true){ return true; }
+      else { return false; }
+    }
+</script>
+</body>
+
+</html>
